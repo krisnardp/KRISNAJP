@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belajar Katakana – Easy, Hard, Expert</title>
+<style>
+:root{--bg:#fafaf8;--surface:#fff;--ink:#1d1d1f;--mute:#6b6b70;--line:#e3e3df;--accent:#c8312f;--accent-ink:#fff;--ok:#1f7a4d;--okbg:#e5f4ec;--bad:#b3261e;--badbg:#fbe9e7}
+@media (prefers-color-scheme:dark){:root{--bg:#141415;--surface:#1d1d1f;--ink:#f1f1ee;--mute:#9a9aa0;--line:#2e2e32;--accent:#e5584f;--accent-ink:#141415;--ok:#6fd3a2;--okbg:#17302457;--bad:#ff8a80;--badbg:#3a1b1a80}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI","Noto Sans JP","Hiragino Sans",sans-serif;min-height:100vh;display:flex;justify-content:center;padding:24px 16px}
+main{width:100%;max-width:560px}
+h1{font-size:1.4rem;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 24px}
+.back{display:inline-block;color:var(--mute);text-decoration:none;margin-bottom:12px}
+.back:hover{color:var(--ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card+.card{margin-top:16px}
+h2{font-size:1rem;margin:0 0 10px}
+h3{font-size:.95rem;margin:18px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+a:focus-visible,button:focus-visible,.inp:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{width:100%;border:0;border-radius:12px;padding:14px;font:inherit;font-weight:600;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);margin-top:10px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.hint{color:var(--mute);font-size:.875rem;margin:8px 0 0}
+.hud{display:flex;justify-content:space-between;color:var(--mute);font-size:.9rem;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:20px}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left}
+.q{font-size:4.5rem;line-height:1.2;text-align:center;margin:12px 0 22px;font-weight:600}
+.q small{display:block;font-size:.85rem;font-weight:400;color:var(--mute);margin-bottom:4px}
+.inp{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:14px;font:inherit;font-size:1.3rem;text-align:center}
+.inp.ok{border-color:var(--ok);background:var(--okbg)}
+.inp.bad{border-color:var(--bad);background:var(--badbg)}
+.row{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-top:10px}
+.row .btn{margin-top:0}
+.fb{min-height:1.5em;margin:14px 0 0;text-align:center;font-weight:600}
+.rd{text-align:center;color:var(--mute);margin:6px 0 12px}
+.rd b{color:var(--ink);font-size:1.5rem;margin-right:6px}
+.score{font-size:3.2rem;font-weight:700;text-align:center;margin:0}
+.stats{display:flex;justify-content:center;gap:20px;color:var(--mute);margin:4px 0 20px;flex-wrap:wrap}
+.rv{list-style:none;margin:0;padding:0}
+.rv li{padding:10px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.rv li:first-child{border-top:0}
+.rv .jp{font-size:1.5rem;font-weight:600}
+.rv .yes{color:var(--ok)}.rv .no{color:var(--bad);grid-column:2;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(var(--c,5),1fr);gap:6px;margin:12px 0}
+.cell{border:1px solid var(--line);border-radius:10px;padding:8px 2px;text-align:center}
+.cell.e{border:0}
+.cell b{display:block;font-size:1.5rem;font-weight:600}
+.cell span{color:var(--mute);font-size:.8rem}
+.pr{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;text-align:center;padding:8px 0;border-top:1px solid var(--line)}
+.pr b{font-size:1.4rem;letter-spacing:.12em;font-weight:600}
+.pr small{display:block;color:var(--mute);font-size:.75rem}
+.rules{padding-left:20px;margin:8px 0}
+.rules li{margin:6px 0}
+.mat p{margin:8px 0}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">‹ Beranda</a>
+  <h1>Belajar Katakana</h1>
+  <p class="sub">Tulis cara bacanya, atau tulis katakananya.</p>
+
+  <section id="menu">
+    <div class="card"><h2>Level</h2><div class="chips" id="lv"></div><p class="hint" id="lvH"></p></div>
+    <div class="card"><h2>Jenis soal</h2><div class="chips" id="ty"></div><p class="hint" id="tyH"></p></div>
+    <div class="card"><h2>Cakupan huruf</h2><div class="chips" id="sc"></div><p class="hint" id="scH"></p></div>
+    <div class="card"><h2>Jumlah soal</h2><div class="chips" id="ct"></div></div>
+    <div class="card"><h2>Batas waktu per soal</h2><div class="chips" id="tm"></div></div>
+    <div class="card"><h2>Ketik romaji otomatis jadi katakana</h2><div class="chips" id="au"></div><p class="hint">Dipakai di soal "Tulis katakana". Matikan jika kamu memakai keyboard Jepang.</p></div>
+    <div class="card"><button class="btn" id="start">Lihat materi &amp; mulai</button></div>
+  </section>
+
+  <section id="mat" class="hide">
+    <div class="card mat" id="matBody"></div>
+    <div class="card"><button class="btn" id="go">Mengerti, mulai latihan</button><button class="btn ghost" id="mBack">Kembali ke pengaturan</button></div>
+  </section>
+
+  <section id="quiz" class="hide">
+    <div class="hud"><span id="prog"></span><span id="tmr"></span><span id="scr"></span></div>
+    <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+    <div class="card">
+      <div class="q" id="q"></div>
+      <input class="inp" id="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Jawabanmu">
+      <div class="row"><button class="btn" id="check">Periksa</button><button class="btn ghost" id="skip">Tidak tahu</button></div>
+      <p class="fb" id="fb" aria-live="polite"></p>
+      <p class="rd" id="rd"></p>
+      <button class="btn hide" id="next">Lanjut</button>
+    </div>
+  </section>
+
+  <section id="result" class="hide">
+    <div class="card">
+      <p class="score" id="rs"></p>
+      <div class="stats" id="rstats"></div>
+      <button class="btn" id="retryWrong">Ulangi huruf yang salah</button>
+      <button class="btn ghost" id="again">Main lagi dengan pengaturan sama</button>
+      <button class="btn ghost" id="toMenu">Kembali ke pengaturan</button>
+    </div>
+    <div class="card" id="rvCard"><h2>Review jawaban salah</h2><ul class="rv" id="rv"></ul></div>
+  </section>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+// romaji -> katakana
+const KT={};
+(()=>{const R={k:'かきくけこ',s:'さしすせそ',t:'たちつてと',n:'なにぬねの',h:'はひふへほ',m:'まみむめも',r:'らりるれろ',g:'がぎぐげご',z:'ざじずぜぞ',d:'だぢづでど',b:'ばびぶべぼ',p:'ぱぴぷぺぽ',y:'や-ゆ-よ',w:'わ---を'};
+'aiueo'.split('').forEach((v,x)=>KT[v]='あいうえお'[x]);
+for(const c in R)[...R[c]].forEach((ch,x)=>{if(ch!=='-')KT[c+'aiueo'[x]]=ch});
+const Y={ky:'き',gy:'ぎ',ny:'に',hy:'ひ',my:'み',ry:'り',by:'び',py:'ぴ',sh:'し',ch:'ち',j:'じ',sy:'し',ty:'ち',zy:'じ',jy:'じ',cy:'ち'};
+for(const c in Y)[['a','ゃ'],['u','ゅ'],['o','ょ']].forEach(([v,m])=>KT[c+v]=Y[c]+m);
+Object.assign(KT,{shi:'し',chi:'ち',tsu:'つ',fu:'ふ',ji:'じ'});})();
+function toKana(s,final){
+  s=s.toLowerCase();let out='',i=0;
+  while(i<s.length){
+    const c=s[i],nx=s[i+1];
+    if(!/[a-z]/.test(c)){out+=c;i++;continue}
+    if(nx===c&&!'aiueon'.includes(c)){out+='っ';i++;continue}
+    if(c==='n'){
+      if(nx==='n'){out+='ん';i+=2;continue}
+      if(nx&&!'aiueoy'.includes(nx)){out+='ん';i++;continue}
+      if(!nx&&final){out+='ん';i++;continue}
+    }
+    let m=null;
+    for(let L=3;L>=1;L--){const k=s.substr(i,L);if(KT[k]){m=[k,KT[k]];break}}
+    if(m){out+=m[1];i+=m[0].length}else{out+=c;i++}
+  }
+  return out;
+}
+
+const toKata=s=>s.replace(/[\u3041-\u3096]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));
+// data huruf per level
+const LV={
+1:'a i u e o ka ki ku ke ko sa shi su se so ta chi tsu te to na ni nu ne no ha hi fu he ho ma mi mu me mo ya yu yo ra ri ru re ro wa wo n',
+2:'ga gi gu ge go za ji zu ze zo da de do ba bi bu be bo pa pi pu pe po',
+3:'kya kyu kyo sha shu sho cha chu cho nya nyu nyo hya hyu hyo mya myu myo rya ryu ryo gya gyu gyo ja ju jo bya byu byo pya pyu pyo'};
+const ALL=[];for(const L in LV)LV[L].split(' ').forEach(r=>ALL.push({r,k:toKata(toKana(r,true)),L:+L}));
+
+// materi
+const chart=(str,c)=>`<div class="grid" style="--c:${c}">${str.split(' ').map(r=>r==='-'?'<div class="cell e"></div>':`<div class="cell"><b>${toKata(toKana(r,true))}</b><span>${r}</span></div>`).join('')}</div>`;
+const pair=(a,b,x,y)=>`<div class="pr"><div><b>${a}</b><small>${x}</small></div><i>→</i><div><b>${b}</b><small>${y}</small></div></div>`;
+const MAT={
+1:()=>`<h2>Materi Easy: katakana dasar</h2>
+<p>Katakana dasar ada 46 huruf. Setiap huruf mewakili satu suku kata, kecuali ん (n) yang berdiri sendiri.</p>
+${chart('a i u e o ka ki ku ke ko sa shi su se so ta chi tsu te to na ni nu ne no ha hi fu he ho ma mi mu me mo ya - yu - yo ra ri ru re ro wa - - - wo n - - - -',5)}
+<h3>Perhatikan bacaan khusus</h3>
+<ul class="rules"><li>し = <b>shi</b>, ち = <b>chi</b>, つ = <b>tsu</b>, ふ = <b>fu</b></li><li>を ditulis <b>wo</b> tetapi dibaca "o". Di latihan, jawaban <b>wo</b> atau <b>o</b> sama-sama diterima.</li><li>Baris ya hanya punya ya, yu, yo. Baris wa hanya punya wa dan wo.</li></ul>
+<h3>Kapan katakana dipakai?</h3>
+<p>Katakana dipakai untuk kata serapan dan nama asing, misalnya コーヒー (kōhī, kopi), テレビ (terebi, televisi), dan パン (pan, roti). Bunyinya sama dengan katakana, hanya bentuknya lebih bersudut.</p>
+<h3>Hati-hati, bentuknya mirip</h3>
+<ul class="rules"><li>Coretan panjang <b>シ</b> (shi) dan <b>ン</b> (n) naik ke kanan.</li><li>Coretan panjang <b>ツ</b> (tsu) dan <b>ソ</b> (so) turun ke kiri.</li></ul>`,
+2:()=>`<h2>Materi Hard: tenten (゛) dan maru (゜)</h2>
+<p>Dua tanda kecil ini mengubah bunyi huruf yang sudah kamu kenal. Bentuk hurufnya sama, hanya bunyinya berubah.</p>
+<h3>Tenten ゛ (dakuten): bunyi jadi lebih "berat"</h3>
+<ul class="rules"><li>Hanya huruf baris <b>K, S, T, H</b> yang bisa diberi tenten: か き く け こ, さ し す せ そ, た ち つ て と, は ひ ふ へ ほ.</li><li><b>あ い う え お</b> tidak bisa diberi tenten. Baris na, ma, ya, ra, wa, dan ん juga tidak bisa.</li></ul>
+${pair('かきくけこ','がぎぐげご','ka ki ku ke ko','ga gi gu ge go')}
+${pair('さしすせそ','ざじずぜぞ','sa shi su se so','za ji zu ze zo')}
+${pair('たちつてと','だぢづでど','ta chi tsu te to','da ji zu de do')}
+${pair('はひふへほ','ばびぶべぼ','ha hi fu he ho','ba bi bu be bo')}
+<h3>Maru ゜ (handakuten): hanya untuk baris H</h3>
+<ul class="rules"><li>Hanya <b>は ひ ふ へ ほ</b> yang bisa diberi maru, dan bunyinya berubah dari h menjadi p.</li><li>Baris H adalah satu-satunya baris yang bisa diberi tenten maupun maru.</li></ul>
+${pair('はひふへほ','ぱぴぷぺぽ','ha hi fu he ho','pa pi pu pe po')}
+<h3>Catatan</h3>
+<p>ぢ dan づ bunyinya sama dengan じ dan ず, dan jarang dipakai. Keduanya tidak keluar di latihan ini.</p>
+<h3>Huruf baru di level ini</h3>${chart('ga gi gu ge go za ji zu ze zo da - - de do ba bi bu be bo pa pi pu pe po',5)}`,
+3:()=>`<h2>Materi Expert: kombo ya, yu, yo</h2>
+<p>Huruf berakhiran <b>i</b> bisa digabung dengan ゃ ゅ ょ yang ditulis <b>kecil</b>. Hasilnya satu suku kata, bukan dua. き + ゃ = きゃ dibaca <b>kya</b>, bukan "ki-ya".</p>
+<ul class="rules"><li>Yang bisa dikombo: <b>き し ち に ひ み り</b>, dan yang bertenten/bermaru: <b>ぎ じ び ぴ</b>.</li><li><b>い</b> sendiri tidak bisa dikombo. Huruf yang tidak berakhiran i (か, さ, た, dan seterusnya) juga tidak bisa.</li><li>ゃ ゅ ょ harus kecil. Kalau besar (や ゆ よ), artinya dua suku kata: きや = ki-ya.</li><li>Tenten dan maru ikut dibawa: ぎゃ gya, びゃ bya, ぴゃ pya.</li><li>Bacaan khusus: しゃ = <b>sha</b>, ちゃ = <b>cha</b>, じゃ = <b>ja</b> (bukan "jya").</li></ul>
+<h3>Daftar kombo</h3>${chart(LV[3],3)}
+<h3>Tambahan khusus katakana (tidak keluar di latihan)</h3>
+<ul class="rules"><li>Tanda <b>ー</b> memanjangkan vokal: コーヒー = kōhī, ビール = bīru.</li><li><b>ッ</b> kecil menggandakan konsonan berikutnya: ベッド = beddo.</li><li>Bunyi serapan: ファ fa, フィ fi, ティ ti, ディ di, ウィ wi, ヴ vu.</li></ul>`};
+
+// pengaturan
+const cfg={lv:1,ty:'mix',sc:'all',ct:10,tm:20,au:true};
+const LH={1:'Easy: 46 katakana dasar seperti a, ka, sa, tsu, ya, ha.',2:'Hard: Easy + tenten (゛) dan maru (゜) seperti ga, za, ba, pa. Ada materi dulu.',3:'Expert: Hard + kombo ya/yu/yo seperti kya, sha, cha, ja, byo. Ada materi dulu.'};
+const TH={ro:'Lihat katakana, tulis cara bacanya (romaji).',hi:'Lihat romaji, tulis katakananya.',mix:'Dua jenis soal diacak.'};
+function chips(el,items,key){
+  const box=$(el);box.innerHTML='';
+  items.forEach(([v,label])=>{
+    const b=document.createElement('button');b.className='chip';b.textContent=label;
+    b.setAttribute('aria-pressed',cfg[key]===v);
+    b.onclick=()=>{cfg[key]=v;menu()};box.appendChild(b);
+  });
+}
+const pool=()=>ALL.filter(x=>cfg.sc==='new'?x.L===cfg.lv:x.L<=cfg.lv);
+function menu(){
+  chips('#lv',[[1,'Easy'],[2,'Hard'],[3,'Expert']],'lv');$('#lvH').textContent=LH[cfg.lv];
+  chips('#ty',[['ro','Tulis romaji'],['hi','Tulis katakana'],['mix','Campuran']],'ty');$('#tyH').textContent=TH[cfg.ty];
+  chips('#sc',[['all','Semua sampai level ini'],['new','Hanya huruf baru']],'sc');
+  $('#scH').textContent=`${pool().length} huruf akan keluar.`;
+  chips('#ct',[[10,'10'],[20,'20'],[0,'Semua']],'ct');
+  chips('#tm',[[10,'10 dtk'],[20,'20 dtk'],[30,'30 dtk'],[0,'Tanpa batas']],'tm');
+  chips('#au',[[true,'Aktif'],[false,'Mati']],'au');
+}
+const show=id=>['menu','mat','quiz','result'].forEach(s=>$('#'+s).classList.toggle('hide',s!==id));
+
+// kuis
+let deck=[],i=0,score=0,wrong=[],locked=false,timer=null,left=0,t0=0,cur='ro';
+const buildDeck=()=>{const p=shuffle(pool());return cfg.ct?p.slice(0,cfg.ct):p};
+function begin(d){deck=d;i=0;score=0;wrong=[];t0=Date.now();show('quiz');ask()}
+function ask(){
+  locked=false;const w=deck[i];
+  cur=cfg.ty==='mix'?(Math.random()<.5?'ro':'hi'):cfg.ty;
+  $('#prog').textContent=`Soal ${i+1}/${deck.length}`;$('#scr').textContent=`Skor ${score}`;
+  const q=$('#q');q.innerHTML=`<small>${cur==='ro'?'Tulis cara bacanya (romaji)':'Tulis dalam katakana'}</small><span></span>`;
+  q.lastChild.textContent=cur==='ro'?w.k:w.r;
+  $('#fb').textContent='';$('#rd').textContent='';
+  $('#next').classList.add('hide');
+  const inp=$('#ans');inp.value='';inp.disabled=false;inp.className='inp';inp.lang=cur==='hi'?'ja':'en';
+  $('#check').disabled=false;$('#skip').disabled=false;inp.focus();
+  startTimer();
+}
+function startTimer(){
+  clearInterval(timer);
+  const bar=$('#bar');bar.style.transition='none';bar.style.transform='scaleX(1)';
+  if(!cfg.tm){$('#tmr').textContent='';return}
+  left=cfg.tm;$('#tmr').textContent=`${left} dtk`;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transition=`transform ${cfg.tm}s linear`;bar.style.transform='scaleX(0)'}));
+  timer=setInterval(()=>{left--;$('#tmr').textContent=`${Math.max(left,0)} dtk`;if(left<=0){clearInterval(timer);answer(false,true)}},1000);
+}
+function check(skip){
+  if(locked)return;const w=deck[i],inp=$('#ans');
+  const v=inp.value.trim().toLowerCase().replace(/\s+/g,'');
+  const got=(cur==='hi'&&!cfg.au)?v:toKata(toKana(v,true));
+  if(cur==='hi')inp.value=got;
+  let ok=!skip&&got===w.k;
+  if(cur==='ro'&&/[^\x00-\x7f]/.test(v))ok=false;
+  if(!skip&&cur==='ro'&&w.k==='ヲ'&&v==='o')ok=true;
+  answer(ok,false,skip?'':(cur==='hi'?got:v));
+}
+function answer(ok,timeout,given){
+  if(locked)return;locked=true;clearInterval(timer);
+  const bar=$('#bar');bar.style.transform=getComputedStyle(bar).transform;bar.style.transition='none';
+  const w=deck[i],inp=$('#ans'),g=given!==undefined?given:inp.value;
+  inp.disabled=true;inp.classList.add(ok?'ok':'bad');$('#check').disabled=true;$('#skip').disabled=true;
+  const fb=$('#fb');
+  if(ok){score++;fb.textContent='Benar!';fb.style.color='var(--ok)'}
+  else{wrong.push({w,timeout:!!timeout,given:g});fb.textContent=timeout?'Waktu habis.':'Kurang tepat.';fb.style.color='var(--bad)'}
+  const rd=$('#rd');rd.innerHTML='<b></b><span></span>';rd.firstChild.textContent=w.k;rd.lastChild.textContent=`dibaca ${w.r}`;
+  $('#scr').textContent=`Skor ${score}`;
+  const n=$('#next');n.textContent=i+1<deck.length?'Lanjut':'Lihat hasil';n.classList.remove('hide');n.focus();
+}
+function next(){if(i+1<deck.length){i++;ask()}else finish()}
+function finish(){
+  clearInterval(timer);
+  const pct=Math.round(score/deck.length*100),sec=Math.round((Date.now()-t0)/1000);
+  $('#rs').textContent=`${score}/${deck.length}`;
+  $('#rstats').innerHTML=`<span>Akurasi ${pct}%</span><span>Waktu ${Math.floor(sec/60)}m ${sec%60}d</span><span>Rata-rata ${(sec/deck.length).toFixed(1)} dtk/soal</span>`;
+  const rv=$('#rv');rv.innerHTML='';
+  wrong.forEach(({w,timeout,given})=>{
+    const li=document.createElement('li');
+    li.innerHTML='<span class="jp"></span><span class="yes"></span><span class="no"></span>';
+    li.querySelector('.jp').textContent=w.k;li.querySelector('.yes').textContent=`dibaca ${w.r}`;
+    li.querySelector('.no').textContent=timeout?'Waktu habis':(given?`Jawabanmu: ${given}`:'Dilewati');
+    rv.appendChild(li);
+  });
+  $('#rvCard').classList.toggle('hide',!wrong.length);
+  $('#retryWrong').classList.toggle('hide',!wrong.length);
+  show('result');
+}
+$('#start').onclick=()=>{$('#matBody').innerHTML=toKata(MAT[cfg.lv]());show('mat');scrollTo(0,0)};
+$('#mBack').onclick=()=>show('menu');
+$('#go').onclick=()=>begin(buildDeck());
+$('#next').onclick=next;
+$('#check').onclick=()=>check();
+$('#skip').onclick=()=>check(true);
+$('#retryWrong').onclick=()=>begin(shuffle(wrong.map(x=>x.w)));
+$('#again').onclick=()=>begin(buildDeck());
+$('#toMenu').onclick=()=>show('menu');
+$('#ans').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();check()}});
+$('#ans').addEventListener('input',e=>{if(cur!=='hi'||!cfg.au||e.isComposing)return;const v=toKata(toKana(e.target.value));if(v!==e.target.value)e.target.value=v});
+document.addEventListener('keydown',e=>{
+  if($('#quiz').classList.contains('hide')||e.target.id==='ans')return;
+  if(e.key==='Enter'&&locked){e.preventDefault();next()}
+});
+menu();
+</script>
+</body>
+</html>
