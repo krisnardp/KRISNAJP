@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARTI (Kata Benda) – Kosakata Jepang</title>
+<meta name="description" content="Kuis kosakata bahasa Jepang (meishi): pilih arti yang benar, A/B/C.">
+<style>
+:root{--bg:#fafaf8;--surface:#fff;--ink:#1d1d1f;--mute:#6b6b70;--line:#e3e3df;--accent:#c8312f;--accent-ink:#fff;--ok:#1f7a4d;--okbg:#e5f4ec;--bad:#b3261e;--badbg:#fbe9e7}
+@media (prefers-color-scheme:dark){:root{--bg:#141415;--surface:#1d1d1f;--ink:#f1f1ee;--mute:#9a9aa0;--line:#2e2e32;--accent:#e5584f;--accent-ink:#141415;--ok:#6fd3a2;--okbg:#17302457;--bad:#ff8a80;--badbg:#3a1b1a80}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI","Noto Sans JP","Hiragino Sans",sans-serif;min-height:100vh;display:flex;justify-content:center;padding:24px 16px}
+main{width:100%;max-width:560px}
+h1{font-size:1.4rem;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card+.card{margin-top:16px}
+h2{font-size:1rem;margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;font:inherit;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{width:100%;border:0;border-radius:12px;padding:14px;font:inherit;font-weight:600;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);margin-top:10px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.hint{color:var(--mute);font-size:.875rem;margin:8px 0 0}
+.hud{display:flex;justify-content:space-between;color:var(--mute);font-size:.9rem;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:20px}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left;transition:transform .25s linear}
+.q{font-size:2.6rem;line-height:1.25;text-align:center;margin:16px 0 28px;font-weight:600;word-break:keep-all}
+.q small{display:block;font-size:.85rem;font-weight:400;color:var(--mute);margin-bottom:4px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:14px;font:inherit;cursor:pointer}
+.opt b{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:.85rem}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}
+.opt.bad{background:var(--badbg);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.5em;margin:14px 0 0;text-align:center;font-weight:600}
+.score{font-size:3.2rem;font-weight:700;text-align:center;margin:0}
+.stats{display:flex;justify-content:center;gap:20px;color:var(--mute);margin:4px 0 20px;flex-wrap:wrap}
+.rv{list-style:none;margin:0;padding:0}
+.rv li{padding:10px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.rv li:first-child{border-top:0}
+.rv .jp{font-size:1.25rem;font-weight:600}
+.rv .no{color:var(--bad)}.rv .yes{color:var(--ok)}
+.rv .no,.rv .yes{font-size:.9rem;grid-column:2}
+.inp{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:14px;font:inherit;font-size:1.15rem;text-align:center}
+.inp:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.inp.ok{border-color:var(--ok);background:var(--okbg)}
+.inp.bad{border-color:var(--bad);background:var(--badbg)}
+.row{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-top:10px}
+.row .btn{margin-top:0}
+.q.sm{font-size:1.7rem}
+.rd{text-align:center;color:var(--mute);margin:6px 0 0}
+.rd b{color:var(--ink);font-size:1.2rem;margin-right:6px}
+.back{display:inline-block;color:var(--mute);text-decoration:none;margin-bottom:12px}
+.back:hover{color:var(--ink)}
+.back:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+.hide{display:none!important}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">‹ Beranda</a>
+  <h1>ARTI (Kata Benda)</h1>
+  <p class="sub">Pilih atau tulis arti dan hiragana dari setiap kata.</p>
+
+  <section id="menu">
+    <div class="card">
+      <h2>Mode soal</h2>
+      <div class="chips" id="modes"></div>
+      <p class="hint" id="modeHint"></p>
+    </div>
+    <div class="card">
+      <h2>Kategori</h2>
+      <div class="chips" id="cats"></div>
+      <p class="hint" id="catHint"></p>
+    </div>
+    <div class="card">
+      <h2>Jumlah soal</h2>
+      <div class="chips" id="counts"></div>
+    </div>
+    <div class="card">
+      <h2>Batas waktu per soal</h2>
+      <div class="chips" id="times"></div>
+    </div>
+    <div class="card"><button class="btn" id="start">Mulai kuis</button></div>
+  </section>
+
+  <section id="quiz" class="hide">
+    <div class="hud"><span id="prog"></span><span id="tm"></span><span id="sc"></span></div>
+    <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+    <div class="card">
+      <div class="q" id="q"></div>
+      <div class="opts" id="opts"></div>
+      <div id="typed" class="hide">
+        <input class="inp" id="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Jawabanmu">
+        <div class="row"><button class="btn" id="check">Periksa</button><button class="btn ghost" id="skip">Tidak tahu</button></div>
+      </div>
+      <p class="fb" id="fb" aria-live="polite"></p>
+      <p class="rd" id="rd"></p>
+      <button class="btn hide" id="next">Lanjut</button>
+    </div>
+    <p class="hint" style="text-align:center">Pilihan ganda: tekan A / B / C. Soal ketik: tekan Enter untuk memeriksa.</p>
+  </section>
+
+  <section id="result" class="hide">
+    <div class="card">
+      <p class="score" id="rs"></p>
+      <div class="stats" id="rstats"></div>
+      <button class="btn" id="retryWrong">Ulangi soal yang salah</button>
+      <button class="btn ghost" id="again">Main lagi dengan pengaturan sama</button>
+      <button class="btn ghost" id="toMenu">Kembali ke menu</button>
+    </div>
+    <div class="card" id="rvCard"><h2>Review jawaban salah</h2><ul class="rv" id="rv"></ul></div>
+  </section>
+</main>
+
+<script>
+// kategori|hiragana|ejaan|arti
+const RAW=`T|うえ|ue|Atas
+T|えき|eki|Stasiun
+T|した|shita|Bawah
+T|なか|naka|Tengah / dalam
+T|そと|soto|Luar
+T|ちかく|chikaku|Dekat
+T|うけつけ|uketsuke|Resepsionis / meja penerimaan
+T|うち|uchi|Rumah
+T|くに|kuni|Negara
+T|いま|ima|Ruang keluarga / ruang tamu
+T|まえ|mae|Depan
+T|うしろ|ushiro|Belakang
+T|となり|tonari|Samping / sebelah
+T|うみ|umi|Laut
+T|みせ|mise|Toko
+T|ところ|tokoro|Tempat
+T|まち|machi|Kota
+T|やま|yama|Gunung
+T|かわ|kawa|Sungai
+T|かんこく|Kankoku|Korea
+T|にわ|niwa|Halaman
+T|みぎ|migi|Kanan
+T|ひだり|hidari|Kiri
+T|あいだ|aida|Antara
+T|だいどころ|daidokoro|Dapur
+T|かいぎしつ|kaigishitsu|Ruang rapat
+T|だいがく|daigaku|Universitas
+T|がいこく|gaikoku|Luar negeri / negara asing
+T|くうこう|kuukou|Bandara
+T|こうえん|kouen|Taman
+T|ぎんこう|ginkou|Bank
+T|きっさてん|kissaten|Kafe
+T|がっこう|gakkou|Sekolah
+T|ゆうびんきょく|yuubinkyoku|Kantor pos
+T|じゅうしょ|juusho|Alamat
+T|としょかん|toshokan|Perpustakaan
+T|びじゅつかん|bijutsukan|Museum seni
+T|ちゅうごく|Chuugoku|Tiongkok / China
+T|きょうしつ|kyoushitsu|Ruang kelas
+T|しょくどう|shokudou|Kantin
+T|びょういん|byouin|Rumah sakit
+T|じむしょ|jimusho|Kantor
+T|かいしゃ|kaisha|Perusahaan
+W|ここ / そこ / あそこ|koko / soko / asoko|Di sini / di situ / di sana
+W|こちら / そちら / あちら / どちら|kochira / sochira / achira / dochira|Sebelah sini / situ / sana / mana (sopan)
+W|この / その / あの|kono / sono / ano|Ini / itu / itu yang jauh (diikuti kata benda)
+W|これ / それ / あれ|kore / sore / are|Ini / itu / itu yang jauh (berdiri sendiri)
+W|じかん|jikan|Waktu
+W|あさ|asa|Pagi
+W|ひる|hiru|Siang
+W|よる（ばん）|yoru (ban)|Malam
+W|けさ|kesa|Tadi pagi
+W|こんばん|konban|Malam ini
+W|おととい|ototoi|Kemarin lusa
+W|きのう|kinou|Kemarin
+W|きょう|kyou|Hari ini
+W|あした|ashita|Besok
+W|あさって|asatte|Besok lusa
+W|せんしゅう|senshuu|Minggu lalu
+W|こんしゅう|konshuu|Minggu ini
+W|らいしゅう|raishuu|Minggu depan
+W|せんげつ|sengetsu|Bulan lalu
+W|こんげつ|kongetsu|Bulan ini
+W|らいげつ|raigetsu|Bulan depan
+W|きょねん|kyonen|Tahun lalu
+W|ことし|kotoshi|Tahun ini
+W|らいねん|rainen|Tahun depan
+W|まいあさ|maiasa|Setiap pagi
+W|まいばん|maiban|Setiap malam
+W|まいにち|mainichi|Setiap hari
+K|すこし|sukoshi|Sedikit`;
+const CATS={T:'Tempat',W:'Waktu & kata tunjuk',K:'Kata keterangan'};
+const ALL=RAW.split('\n').map(l=>{const [c,jp,rm,id]=l.split('|');return{c,jp,rm,id}});
+const $=s=>document.querySelector(s);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+
+const cfg={cats:new Set(['T','W','K']),count:10,time:15,mode:'mc'};
+const MH={mc:'Lihat hiragana, pilih arti (A/B/C).',id:'Lihat hiragana, ketik artinya. Salah ketik satu huruf masih diterima. Waktu soal 2×.',jp:'Lihat arti, tulis hiragananya. Ketik romaji, otomatis berubah jadi hiragana. Waktu soal 2×.',mix:'Ketiga jenis soal diacak. Soal ketik mendapat waktu 2×.'};
+// ==== helpers ====
+const KT={};
+(()=>{const R={k:'かきくけこ',s:'さしすせそ',t:'たちつてと',n:'なにぬねの',h:'はひふへほ',m:'まみむめも',r:'らりるれろ',g:'がぎぐげご',z:'ざじずぜぞ',d:'だぢづでど',b:'ばびぶべぼ',p:'ぱぴぷぺぽ',y:'や-ゆ-よ',w:'わ---を'};
+'aiueo'.split('').forEach((v,x)=>KT[v]='あいうえお'[x]);
+for(const c in R)[...R[c]].forEach((ch,x)=>{if(ch!=='-')KT[c+'aiueo'[x]]=ch});
+const Y={ky:'き',gy:'ぎ',ny:'に',hy:'ひ',my:'み',ry:'り',by:'び',py:'ぴ',sh:'し',ch:'ち',j:'じ',sy:'し',ty:'ち',zy:'じ',jy:'じ',cy:'ち'};
+for(const c in Y)[['a','ゃ'],['u','ゅ'],['o','ょ']].forEach(([v,m])=>KT[c+v]=Y[c]+m);
+Object.assign(KT,{shi:'し',chi:'ち',tsu:'つ',fu:'ふ',ji:'じ'});})();
+function toKana(s,final){
+  s=s.toLowerCase();let out='',i=0;
+  while(i<s.length){
+    const c=s[i],nx=s[i+1];
+    if(!/[a-z]/.test(c)){out+=c;i++;continue}
+    if(nx===c&&!'aiueon'.includes(c)){out+='っ';i++;continue}
+    if(c==='n'){
+      if(nx==='n'){out+='ん';i+=2;continue}
+      if(nx&&!'aiueoy'.includes(nx)){out+='ん';i++;continue}
+      if(!nx&&final){out+='ん';i++;continue}
+    }
+    let m=null;
+    for(let L=3;L>=1;L--){const k=s.substr(i,L);if(KT[k]){m=[k,KT[k]];break}}
+    if(m){out+=m[1];i+=m[0].length}else{out+=c;i++}
+  }
+  return out;
+}
+const nId=s=>s.toLowerCase().replace(/\(.*?\)/g,' ').replace(/[^a-z0-9]+/g,' ').trim();
+const lev=(a,b)=>{const d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]};
+const okId=(raw,w)=>{const g=nId(raw);if(!g)return false;const c=[nId(w.id),...w.id.split('/').map(nId)].filter(Boolean);return c.some(x=>x===g||(x.length>=5&&lev(x,g)<=1))};
+const okJp=(raw,w)=>{const g=raw.replace(/[\s\/／（）()]/g,'');if(!g)return false;const c=[w.jp.replace(/[\s\/／（）()]/g,''),...w.jp.split(/[\s\/／（）()]+/).filter(Boolean)];return c.includes(g)};
+// ==== end helpers ====
+let deck=[],i=0,score=0,wrong=[],locked=false,timer=null,left=0,t0=0,qStart=0,lastDeck=[];
+
+function chips(el,items,isSel,onClick){
+  el.innerHTML='';
+  items.forEach(([k,label])=>{
+    const b=document.createElement('button');b.className='chip';b.textContent=label;
+    b.setAttribute('aria-pressed',isSel(k));
+    b.onclick=()=>{onClick(k);renderMenu()};el.appendChild(b);
+  });
+}
+function pool(){return ALL.filter(w=>cfg.cats.has(w.c))}
+function renderMenu(){
+  chips($('#modes'),[['mc','Pilihan ganda'],['id','Ketik arti'],['jp','Tulis hiragana'],['mix','Campuran']],k=>cfg.mode===k,k=>cfg.mode=k);
+  $('#modeHint').textContent=MH[cfg.mode];
+  chips($('#cats'),Object.entries(CATS),k=>cfg.cats.has(k),k=>{
+    cfg.cats.has(k)?cfg.cats.delete(k):cfg.cats.add(k);
+  });
+  chips($('#counts'),[[10,'10'],[20,'20'],[0,'Semua']],k=>cfg.count===k,k=>cfg.count=k);
+  chips($('#times'),[[10,'10 dtk'],[15,'15 dtk'],[30,'30 dtk'],[0,'Tanpa batas']],k=>cfg.time===k,k=>cfg.time=k);
+  const n=pool().length;
+  $('#catHint').textContent=n?`${n} kata tersedia.`:'Pilih minimal satu kategori.';
+  $('#start').disabled=!n;
+}
+function show(id){['menu','quiz','result'].forEach(s=>$('#'+s).classList.toggle('hide',s!==id))}
+
+function buildDeck(){
+  const p=shuffle(pool());
+  return cfg.count?p.slice(0,cfg.count):p;
+}
+function begin(d){
+  deck=d;lastDeck=d;i=0;score=0;wrong=[];t0=Date.now();
+  show('quiz');ask();
+}
+const TYPES={mc:['mc'],id:['id'],jp:['jp'],mix:['mc','id','jp']};
+let curType='mc';
+function ask(){
+  locked=false;const w=deck[i];
+  const ts=TYPES[cfg.mode];curType=ts[Math.random()*ts.length|0];
+  $('#prog').textContent=`Soal ${i+1}/${deck.length}`;
+  $('#sc').textContent=`Skor ${score}`;
+  const q=$('#q');q.classList.toggle('sm',curType==='jp');
+  const lab={mc:'Apa arti kata ini?',id:'Ketik artinya dalam bahasa Indonesia',jp:'Tulis dalam hiragana (ketik romaji, otomatis jadi kana)'}[curType];
+  q.innerHTML=`<small>${lab}</small><span></span>`;q.lastChild.textContent=curType==='jp'?w.id:w.jp;
+  $('#fb').textContent='';$('#fb').style.color='';$('#rd').textContent='';
+  $('#next').classList.add('hide');
+  const box=$('#opts'),inp=$('#ans');
+  box.innerHTML='';box.classList.toggle('hide',curType!=='mc');$('#typed').classList.toggle('hide',curType==='mc');
+  if(curType==='mc'){
+    const others=shuffle(ALL.filter(x=>x.id!==w.id)).slice(0,2);
+    shuffle([w,...others]).forEach((o,k)=>{
+      const b=document.createElement('button');b.className='opt';
+      b.innerHTML=`<b>${'ABC'[k]}</b><span></span>`;b.lastChild.textContent=o.id;
+      b.onclick=()=>answer(b,o.id===w.id);b.dataset.ok=o.id===w.id;box.appendChild(b);
+    });
+  }else{
+    inp.value='';inp.disabled=false;inp.className='inp';inp.lang=curType==='jp'?'ja':'id';
+    $('#check').disabled=false;$('#skip').disabled=false;inp.focus();
+  }
+  startTimer();
+}
+function startTimer(){
+  clearInterval(timer);qStart=Date.now();
+  const bar=$('#bar'),T=cfg.time?cfg.time*(curType==='mc'?1:2):0;
+  bar.style.transition='none';bar.style.transform='scaleX(1)';
+  if(!T){$('#tm').textContent='';return}
+  left=T;$('#tm').textContent=`${left} dtk`;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transition=`transform ${T}s linear`;bar.style.transform='scaleX(0)'}));
+  timer=setInterval(()=>{left--;$('#tm').textContent=`${Math.max(left,0)} dtk`;if(left<=0){clearInterval(timer);answer(null,false,true)}},1000);
+}
+function check(skip){
+  if(locked)return;const w=deck[i],inp=$('#ans');
+  const raw=curType==='jp'?toKana(inp.value,true):inp.value;
+  if(curType==='jp')inp.value=raw;
+  answer(null,!skip&&(curType==='jp'?okJp(raw,w):okId(raw,w)),false,skip?'':raw);
+}
+function answer(btn,ok,timeout,given){
+  if(locked)return;locked=true;clearInterval(timer);
+  const bar=$('#bar');bar.style.transform=getComputedStyle(bar).transform;bar.style.transition='none';
+  const w=deck[i],typed=curType!=='mc';
+  const g=given!==undefined?given:(btn?btn.lastChild.textContent:(typed?$('#ans').value:''));
+  document.querySelectorAll('.opt').forEach(o=>{o.disabled=true;if(o.dataset.ok==='true')o.classList.add('ok')});
+  if(typed){const inp=$('#ans');inp.disabled=true;inp.classList.add(ok?'ok':'bad');$('#check').disabled=true;$('#skip').disabled=true}
+  const fb=$('#fb');
+  if(ok){score++;fb.textContent='Benar!';fb.style.color='var(--ok)'}
+  else{
+    if(btn)btn.classList.add('bad');
+    wrong.push({w,timeout:!!timeout,given:g,type:curType});
+    fb.textContent=(timeout?'Waktu habis.':'Kurang tepat.')+(typed?` Jawaban: ${curType==='jp'?w.jp:w.id}`:'');fb.style.color='var(--bad)';
+  }
+  const rd=$('#rd');rd.innerHTML='<b></b><span></span>';rd.firstChild.textContent=w.jp;rd.lastChild.textContent=`Ejaan: ${w.rm} · Arti: ${w.id}`;
+  $('#sc').textContent=`Skor ${score}`;
+  const n=$('#next');n.textContent=i+1<deck.length?'Lanjut':'Lihat hasil';n.classList.remove('hide');n.focus();
+}
+function next(){ if(i+1<deck.length){i++;ask()}else finish() }
+function finish(){
+  clearInterval(timer);
+  const pct=Math.round(score/deck.length*100),sec=Math.round((Date.now()-t0)/1000);
+  $('#rs').textContent=`${score}/${deck.length}`;
+  $('#rstats').innerHTML=`<span>Akurasi ${pct}%</span><span>Waktu ${Math.floor(sec/60)}m ${sec%60}d</span><span>Rata-rata ${(sec/deck.length).toFixed(1)} dtk/soal</span>`;
+  const rv=$('#rv');rv.innerHTML='';
+  wrong.forEach(({w,timeout,given})=>{
+    const li=document.createElement('li');
+    li.innerHTML='<span class="jp"></span><span class="yes"></span><span class="no"></span>';
+    li.querySelector('.jp').textContent=w.jp;li.querySelector('.yes').dataset.rm=w.rm;li.querySelector('.yes').textContent=`${w.rm} · ${w.id}`;
+    li.querySelector('.no').textContent=timeout?'Waktu habis':(given?`Jawabanmu: ${given}`:'Dilewati');
+    rv.appendChild(li);
+  });
+  $('#rvCard').classList.toggle('hide',!wrong.length);
+  $('#retryWrong').classList.toggle('hide',!wrong.length);
+  show('result');
+}
+$('#start').onclick=()=>begin(buildDeck());
+$('#next').onclick=next;
+$('#retryWrong').onclick=()=>begin(shuffle(wrong.map(x=>x.w)));
+$('#again').onclick=()=>begin(buildDeck());
+$('#toMenu').onclick=()=>{show('menu')};
+document.addEventListener('keydown',e=>{
+  if($('#quiz').classList.contains('hide')||e.target.id==='ans')return;
+  const k='abc'.indexOf(e.key.toLowerCase());
+  if(curType==='mc'&&k>-1&&!locked){document.querySelectorAll('.opt')[k]?.click()}
+  else if(e.key==='Enter'&&locked){e.preventDefault();next()}
+});
+$('#ans').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();check()}});
+$('#ans').addEventListener('input',e=>{if(curType!=='jp'||e.isComposing)return;const v=toKana(e.target.value);if(v!==e.target.value)e.target.value=v});
+$('#check').onclick=()=>check();
+$('#skip').onclick=()=>check(true);
+renderMenu();
+</script>
+</body>
+</html>
