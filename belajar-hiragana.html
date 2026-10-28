@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Belajar Hiragana – Easy, Hard, Expert</title>
 <style>
 :root{--bg:#fafaf8;--surface:#fff;--ink:#1d1d1f;--mute:#6b6b70;--line:#e3e3df;--accent:#c8312f;--accent-ink:#fff;--ok:#1f7a4d;--okbg:#e5f4ec;--bad:#b3261e;--badbg:#fbe9e7}
@@ -61,6 +61,57 @@ a:focus-visible,button:focus-visible,.inp:focus-visible{outline:3px solid var(--
 .kbw{margin:8px 0 0;font-size:.85rem;color:var(--mute);text-align:center;min-height:1.3em}
 .kbw.warn{color:var(--bad);font-weight:600}
 .hide{display:none!important}
+</style>
+<style>
+/* ===== Gaya iOS ===== */
+:root{--bg:#f2f2f7;--surface:#fff;--card:#fff;--ink:#000;--mute:#8e8e93;--line:rgba(60,60,67,.18);--fill:#f2f2f7;--accent:#ff3b30;--accent-ink:#fff;--ok:#248a3d;--okbg:rgba(52,199,89,.16);--bad:#d70015;--badbg:rgba(255,59,48,.14);--ease:cubic-bezier(.32,.72,0,1)}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--surface:#1c1c1e;--card:#1c1c1e;--ink:#fff;--mute:#8e8e93;--line:rgba(84,84,88,.6);--fill:#2c2c2e;--accent:#ff453a;--accent-ink:#fff;--ok:#30d158;--okbg:rgba(48,209,88,.2);--bad:#ff6961;--badbg:rgba(255,69,58,.22)}}
+body{font:17px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Noto Sans JP","Hiragino Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:max(20px,env(safe-area-inset-top)) 16px max(32px,env(safe-area-inset-bottom));-webkit-tap-highlight-color:transparent}
+h1{font-size:2rem;font-weight:700;letter-spacing:-.025em;line-height:1.1;animation:rise .7s var(--ease) both}
+.sub{font-size:1rem;margin-bottom:22px;animation:rise .7s var(--ease) .06s both}
+h2{font-size:.8125rem;font-weight:600;color:var(--mute);letter-spacing:.01em;margin:0 0 12px}
+h3{color:var(--mute)}
+.back{color:var(--accent);font-size:1.0625rem;margin-bottom:6px;padding:6px 0;transition:opacity .2s,transform .3s var(--ease)}
+.back:hover{color:var(--accent);opacity:.7}.back:active{opacity:.4;transform:translateX(-3px)}
+.card{border:0;border-radius:20px;padding:18px 20px;background:var(--card)}
+.card+.card{margin-top:14px}
+section:not(.hide){animation:rise .6s var(--ease) both}
+section:not(.hide)>.card{animation:rise .6s var(--ease) both}
+section:not(.hide)>.card:nth-child(2){animation-delay:.05s}section:not(.hide)>.card:nth-child(3){animation-delay:.1s}
+section:not(.hide)>.card:nth-child(4){animation-delay:.15s}section:not(.hide)>.card:nth-child(5){animation-delay:.2s}
+section:not(.hide)>.card:nth-child(6){animation-delay:.25s}section:not(.hide)>.card:nth-child(n+7){animation-delay:.3s}
+.chip{border:0;background:var(--fill);color:var(--ink);padding:9px 16px;font-weight:500;transition:background-color .25s,color .25s,transform .3s var(--ease)}
+.chip:active{transform:scale(.94)}
+.chip[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);animation:pop .4s var(--ease)}
+a:focus-visible,button:focus-visible,.inp:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{border-radius:14px;padding:15px;font-weight:600;transition:transform .3s var(--ease),opacity .2s,background-color .2s}
+.btn:active:not(:disabled){transform:scale(.97);opacity:.85}
+.btn.ghost{background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);border:0}
+.hint{color:var(--mute)}
+.hud{font-weight:500}
+.bar{height:5px;background:var(--fill);border-radius:3px}
+.bar i{border-radius:3px}
+.q{font-weight:700;letter-spacing:-.02em}
+.q.pop{animation:pop .45s var(--ease)}
+.inp{border:2px solid transparent;background:var(--fill);border-radius:14px;transition:border-color .2s,background-color .2s,box-shadow .2s}
+.inp:focus-visible{outline:0;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 20%,transparent)}
+.inp.ok{border-color:var(--ok);background:var(--okbg);animation:pop .4s var(--ease)}
+.inp.bad{border-color:var(--bad);background:var(--badbg);animation:shake .45s}
+.cell{border:0;background:var(--fill);border-radius:12px}.cell.e{background:none}
+.pr,.rv li{border-color:var(--line)}
+.score{font-weight:700;letter-spacing:-.03em;animation:pop .6s var(--ease) both}
+.opt{border:2px solid transparent;background:var(--fill);border-radius:14px;padding:14px 16px;transition:transform .3s var(--ease),background-color .2s,border-color .2s}
+.opt b{border:0;background:var(--card);font-weight:600}
+.opt:hover:not(:disabled){border-color:transparent}
+.opt:active:not(:disabled){transform:scale(.97)}
+.opt.ok{background:var(--okbg);border-color:var(--ok);animation:pop .4s var(--ease)}
+.opt.bad{background:var(--badbg);border-color:var(--bad);animation:shake .45s}
+.fb{animation:fade .3s both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.88)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -289,5 +340,10 @@ document.addEventListener('keydown',e=>{
 });
 menu();
 </script>
+<script>
+(function(){var q=document.getElementById('q');if(!q)return;
+new MutationObserver(function(){q.classList.remove('pop');void q.offsetWidth;q.classList.add('pop')}).observe(q,{childList:true,characterData:true,subtree:true});})();
+</script>
+
 </body>
 </html>
