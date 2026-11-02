@@ -1,0 +1,143 @@
+/* Gaya bersama halaman latihan. Warna aksen diatur per halaman lewat --accent. */
+:root{
+  --bg:#f2f2f7;--card:#fff;--surface:#fff;--ink:#000;
+  --mute:rgba(60,60,67,.6);--line:rgba(60,60,67,.2);
+  --fill:rgba(118,118,128,.12);--thumb:#fff;--accent-ink:#fff;
+  --ok:#248a3d;--okbg:rgba(52,199,89,.16);--bad:#d70015;--badbg:rgba(255,59,48,.14);
+  --ease:cubic-bezier(.32,.72,0,1);color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#000;--card:#1c1c1e;--surface:#1c1c1e;--ink:#fff;
+  --mute:rgba(235,235,245,.6);--line:rgba(84,84,88,.65);
+  --fill:rgba(118,118,128,.24);--thumb:#636366;
+  --ok:#30d158;--okbg:rgba(48,209,88,.2);--bad:#ff6961;--badbg:rgba(255,69,58,.22);
+}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--ink);min-height:100vh;
+  font:17px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Noto Sans JP","Hiragino Sans",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  display:flex;justify-content:center;
+  padding:max(16px,env(safe-area-inset-top)) 16px max(32px,env(safe-area-inset-bottom));
+}
+main{width:100%;max-width:560px}
+.hide{display:none!important}
+a:focus-visible,button:focus-visible,.inp:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px}
+
+/* Judul besar */
+.back{display:inline-block;color:var(--accent);text-decoration:none;padding:8px 0;margin-bottom:2px}
+.back:active{opacity:.4}
+h1{margin:0;font-size:34px;line-height:1.12;font-weight:700;letter-spacing:.01em}
+.sub{margin:6px 0 28px;color:var(--mute)}
+
+/* Judul bagian dan catatan kaki, di luar kartu seperti Pengaturan iOS */
+h2{margin:0 0 8px;font-size:13px;font-weight:600;color:var(--mute)}
+h3{margin:20px 0 6px;font-size:15px;font-weight:600}
+.hint{margin:8px 0 0;font-size:13px;color:var(--mute)}
+#menu>.card{background:none;padding:0;border-radius:0}
+#menu>.card+.card{margin-top:26px}
+#menu>.card>h2{margin-left:16px}
+#menu>.card>.hint{margin:8px 16px 0}
+
+/* Kartu isi */
+.card{background:var(--card);border-radius:22px;padding:20px}
+.card+.card{margin-top:14px}
+.mat h2{margin-bottom:8px;font-size:20px;font-weight:700;color:var(--ink)}
+.mat p{margin:8px 0}
+.rules{margin:8px 0;padding-left:20px}
+.rules li{margin:6px 0}
+
+/* Pilihan: segmented control */
+.chips{display:flex;gap:2px;padding:2px;background:var(--fill);border-radius:12px}
+.chip{
+  flex:1;min-width:0;border:0;border-radius:10px;background:none;color:var(--ink);
+  padding:7px 6px;font:inherit;font-size:13px;font-weight:500;line-height:1.25;text-wrap:balance;cursor:pointer;
+  transition:background-color .2s,box-shadow .2s;
+}
+.chip[aria-pressed=true]{background:var(--thumb);font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04)}
+
+/* Pilihan dengan label panjang: daftar centang */
+#modes,#cats{display:block;padding:0;background:var(--card);border-radius:14px;overflow:hidden}
+#modes .chip,#cats .chip{
+  position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;
+  padding:12px 16px;border-radius:0;font-size:17px;font-weight:400;text-align:left;box-shadow:none;
+}
+#modes .chip[aria-pressed=true],#cats .chip[aria-pressed=true]{background:none;box-shadow:none;font-weight:400}
+#modes .chip+.chip::before,#cats .chip+.chip::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--line)}
+#modes .chip[aria-pressed=true]::after,#cats .chip[aria-pressed=true]::after{
+  content:"";flex:none;width:12px;height:7px;margin-right:2px;
+  border-left:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(-45deg) translate(1px,-1px);
+}
+.chip:focus-visible{outline-offset:-2px}
+
+/* Tombol */
+.btn{
+  display:block;width:100%;border:0;border-radius:999px;padding:15px;
+  font:inherit;font-weight:600;background:var(--accent);color:var(--accent-ink);cursor:pointer;
+  transition:opacity .15s,transform .25s var(--ease);
+}
+.btn:active:not(:disabled){opacity:.8;transform:scale(.98)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.ghost{margin-top:10px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.btn+.btn{margin-top:10px}
+.row{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-top:10px}
+.row .btn{margin-top:0}
+
+/* Kuis */
+.hud{display:flex;justify-content:space-between;margin:0 4px 8px;font-size:15px;color:var(--mute);font-variant-numeric:tabular-nums}
+.bar{height:4px;margin-bottom:18px;border-radius:2px;background:var(--fill);overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left;transition:transform .25s linear}
+.q{margin:14px 0 26px;text-align:center;font-size:2.6rem;line-height:1.25;font-weight:700;word-break:keep-all}
+.q.sm{font-size:1.7rem}
+.q small{display:block;margin-bottom:6px;font-size:14px;font-weight:400;color:var(--mute)}
+.opts{display:block;border-radius:14px;overflow:hidden;background:var(--fill)}
+.opt{
+  position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;
+  border:0;border-radius:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;
+  transition:background-color .15s;
+}
+.opt+.opt::before{content:"";position:absolute;top:0;left:54px;right:0;height:.5px;background:var(--line)}
+.opt b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--card);color:var(--mute);font-size:13px;font-weight:600}
+.opt:active:not(:disabled){background:var(--line)}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--okbg)}
+.opt.ok b{background:var(--ok);color:#fff}
+.opt.bad{background:var(--badbg);animation:shake .4s}
+.opt.bad b{background:var(--bad);color:#fff}
+.opt:focus-visible{outline-offset:-3px}
+.inp{width:100%;padding:14px;border:2px solid transparent;border-radius:14px;background:var(--fill);color:var(--ink);font:inherit;font-size:1.2rem;text-align:center;transition:border-color .2s,background-color .2s}
+.inp:focus-visible{outline:0;border-color:var(--accent)}
+.inp.ok{border-color:var(--ok);background:var(--okbg)}
+.inp.bad{border-color:var(--bad);background:var(--badbg);animation:shake .4s}
+.kbw{min-height:1.3em;margin:8px 0 0;text-align:center;font-size:13px;color:var(--mute)}
+.kbw.warn{color:var(--bad);font-weight:600}
+.fb{min-height:1.5em;margin:14px 0 0;text-align:center;font-size:15px;font-weight:600}
+.rd{margin:6px 0 12px;text-align:center;color:var(--mute)}
+.rd b{margin-right:6px;font-size:1.2rem;color:var(--ink)}
+
+/* Hasil */
+.score{margin:0;text-align:center;font-size:3.4rem;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin:6px 0 20px;font-size:15px;color:var(--mute)}
+.rv{list-style:none;margin:0;padding:0}
+.rv li{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:11px 0;border-top:.5px solid var(--line)}
+.rv li:first-child{border-top:0}
+.rv .jp{font-size:1.25rem;font-weight:600}
+.rv .yes{color:var(--ok)}
+.rv .no{color:var(--bad)}
+.rv .no,.rv .yes{grid-column:2;font-size:15px}
+
+/* Tabel huruf di halaman materi */
+.grid{display:grid;grid-template-columns:repeat(var(--c,5),1fr);gap:6px;margin:12px 0}
+.cell{padding:8px 2px;border-radius:12px;background:var(--fill);text-align:center}
+.cell.e{background:none}
+.cell b{display:block;font-size:1.5rem;font-weight:600}
+.cell span{font-size:.8rem;color:var(--mute)}
+.pr{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:8px 0;border-top:.5px solid var(--line);text-align:center}
+.pr b{font-size:1.4rem;letter-spacing:.12em;font-weight:600}
+.pr small{display:block;font-size:.75rem;color:var(--mute)}
+
+/* Gerak hanya untuk jawaban salah */
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<title>Belajar Bahasa Jepang</title>
+<meta name="description" content="Latihan kosakata bahasa Jepang: kuis arti, ejaan, hiragana, dan katakana.">
+<style>
+:root{--bg:#f2f2f7;--card:#fff;--ink:#000;--mute:rgba(60,60,67,.6);--sep:rgba(60,60,67,.2);--blue:#007aff;--ease:cubic-bezier(.32,.72,0,1);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--ink:#fff;--mute:rgba(235,235,245,.6);--sep:rgba(84,84,88,.65);--blue:#0a84ff}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);min-height:100vh;font:17px/1.35 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Noto Sans JP","Hiragino Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+main{max-width:600px;margin:0 auto;padding:0 16px 48px}
+.bar{position:sticky;top:0;z-index:10;height:44px;margin:0 -16px;display:flex;align-items:center;justify-content:center;font-weight:600;background:color-mix(in srgb,var(--bg) 72%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid transparent;transition:border-color .25s}
+.bar span{opacity:0;transition:opacity .25s}
+.bar.on{border-bottom-color:var(--sep)}
+.bar.on span{opacity:1}
+.hero{padding:8px 0 26px}
+h1{margin:0;font-size:34px;line-height:1.12;font-weight:700;letter-spacing:.01em}
+.sub{margin:6px 0 0;color:var(--mute)}
+h2{margin:0 16px 8px;font-size:13px;font-weight:400;color:var(--mute)}
+.menu{list-style:none;margin:0;padding:0;background:var(--card);border-radius:20px;overflow:hidden}
+.menu li{position:relative}
+.menu li+li::before{content:"";position:absolute;top:0;left:78px;right:0;height:.5px;background:var(--sep)}
+.item{display:flex;align-items:center;gap:14px;padding:12px 16px;color:inherit;text-decoration:none;transition:background-color .15s}
+.item:active{background:var(--sep)}
+.item:focus-visible{outline:3px solid var(--blue);outline-offset:-3px;border-radius:20px}
+.ico{flex:none;width:46px;height:46px;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:24px;font-weight:600;line-height:1}
+.ico.hira{background:#ff3b30}
+.ico.kata{background:#007aff}
+.ico.arti{background:#c45f00;font-size:17px}
+.ico.salam{background:#af52de;font-size:17px}
+@media (prefers-color-scheme:dark){.ico.hira{background:#ff453a}.ico.kata{background:#0a84ff}.ico.arti{background:#ff9f0a;color:#000}.ico.salam{background:#bf5af2}}
+.txt{flex:1;min-width:0}
+.txt strong{display:block;font-size:17px;font-weight:600}
+.txt span{display:block;margin-top:2px;color:var(--mute);font-size:14px;line-height:1.35}
+.chev{flex:none;width:8px;height:14px;color:var(--mute);opacity:.6}
+.foot{margin:10px 16px 0;color:var(--mute);font-size:13px}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"><span>Belajar Bahasa Jepang</span></div>
+<main>
+  <header class="hero">
+    <h1>Belajar Bahasa Jepang</h1>
+    <p class="sub">Pilih materi yang ingin kamu latih.</p>
+  </header>
+
+  <h2>Materi</h2>
+  <ul class="menu">
+    <li>
+      <a class="item" href="belajar-hiragana.html">
+        <div class="ico hira" lang="ja" aria-hidden="true">あ</div>
+        <div class="txt">
+          <strong>Belajar Hiragana</strong>
+          <span>Tiga level (Easy, Hard, Expert): huruf dasar, tenten dan maru, lalu kombo ya/yu/yo.</span>
+        </div>
+        <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg>
+      </a>
+    </li>
+    <li>
+      <a class="item" href="belajar-katakana.html">
+        <div class="ico kata" lang="ja" aria-hidden="true">ア</div>
+        <div class="txt">
+          <strong>Belajar Katakana</strong>
+          <span>Tiga level yang sama, plus catatan huruf yang mirip dan tanda khusus kata serapan.</span>
+        </div>
+        <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg>
+      </a>
+    </li>
+    <li>
+      <a class="item" href="arti-kata-benda.html">
+        <div class="ico arti" lang="ja" aria-hidden="true">名詞</div>
+        <div class="txt">
+          <strong>Arti kata benda</strong>
+          <span>Kuis 71 kosakata meishi: pilihan ganda, ketik arti, dan tulis hiragana.</span>
+        </div>
+        <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg>
+      </a>
+    </li>
+    <li>
+      <a class="item" href="salam.html">
+        <div class="ico salam" lang="ja" aria-hidden="true">挨拶</div>
+        <div class="txt">
+          <strong>Salam dan Ungkapan</strong>
+          <span>Latihan 26 ungkapan bahasa Jepang: pilihan ganda, ketik arti, dan tulis bahasa Jepang.</span>
+        </div>
+        <svg class="chev" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg>
+      </a>
+    </li>
+  </ul>
+  <p class="foot">Materi lain akan ditambahkan di sini.</p>
+</main>
+<script>
+const bar=document.getElementById('bar');
+const h1=document.querySelector('h1');
+new IntersectionObserver(([e])=>bar.classList.toggle('on',!e.isIntersecting),{rootMargin:'-44px 0px 0px 0px'}).observe(h1);
+</script>
+</body>
+</html>
